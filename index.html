@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منوی کافه تجربه</title>
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#8B4513">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #A52A2A;
+            --background-color: #f5f5f5;
+            --card-color: #ffffff;
+            --accent-color: #D2B48C;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            display: none;
+            border: none;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            max-width: 150px;
+            display: block;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .category {
+            background-color: var(--card-color);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .category-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--secondary-color);
+            background-color: #f9f9f9;
+        }
+
+        .category-header:hover {
+            background-color: #f0f0f0;
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .category.active .category-content {
+            max-height: 1000px;
+            padding: 15px 20px;
+        }
+
+        .menu-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .category-header {
+                padding: 12px 15px;
+                font-size: 1.1em;
+            }
+
+            .header-image {
+                max-height: 200px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="install-btn" id="installButton">نصب اپلیکیشن</button>
+
+    <div class="container">
+        <img src="https://i.ibb.co/r2TjrVXz/photo-2025-08-01-00-40-14.jpg" alt="کافه تجربه" class="header-image">
+        <h1>منوی کافه تجربه</h1>
+
+        <!-- اسپرسو بار -->
+        <div class="category" onclick="toggleCategory(this)">
+            <div class="category-header">
+                <span>اسپرسو بار</span>
+                <span>+</span>
+            </div>
+            <div class="category-content">
+                <div class="menu-item">
+                    <span>اسپرسو</span>
+                    <span>T90</span>
+                </div>
+                <div class="menu-item">
+                    <span>آمریکانو</span>
+                    <span>T100</span>
+                </div>
+                <div class="menu-item">
+                    <span>موکا</span>
+                    <span>T140</span>
+                </div>
+                <div class="menu-item">
+                    <span>لاته</span>
+                    <span>T120</span>
+                </div>
+                <div class="menu-item">
+                    <span>کوکولاته</span>
+                    <span>T140</span>
+                </div>
+                <div class="menu-item">
+                    <span>کورتادو</span>
+                    <span>T110</span>
+                </div>
+                <div class="menu-item">
+                    <span>کارامل ماکیاتو</span>
+                    <span>T140</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- بیکری و قنادی -->
+        <div class="category" onclick="toggleCategory(this)">
+            <div class="category-header">
+                <span>بیکری و قنادی</span>
+                <span>+</span>
+            </div>
+            <div class="category-content">
+                <div class="menu-item">
+                    <span>کوکی شکلاتگردو</span>
+                    <span>T35</span>
+                </div>
+                <div class="menu-item">
+                    <span>کوکی دبل چاکلت پنیری</span>
+                    <span>T65</span>
+                </div>
+                <div class="menu-item">
+                    <span>گرانولا بار</span>
+                    <span>T80</span>
+                </div>
+                <div class="menu-item">
+                    <span>چیزکیک سن سباستین پسته</span>
+                    <span>T170</span>
+                </div>
+                <div class="menu-item">
+                    <span>تیرامیسو</span>
+                    <span>T125</span>
+                </div>
+                <div class="menu-item">
+                    <span>چیزکیک انبه</span>
+                    <span>T140</span>
+                </div>
+                <div class="menu-item">
+                    <span>جار سه شیر</span>
+                    <span>T140</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- برانچ -->
+        <div class="category" onclick="toggleCategory(this)">
+            <div class="category-header">
+                <span>برانچ</span>
+                <span>+</span>
+            </div>
+            <div class="category-content">
+                <div class="menu-item">
+                    <span>کروسان بیکن</span>
+                    <span>T240</span>
+                </div>
+                <div class="menu-item">
+                    <span>چاپاتای مرغ و پسو</span>
+                    <span>T285</span>
+                </div>
+                <div class="menu-item">
+                    <span>پنینی مرغ باباغونوش</span>
+                    <span>T260</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- نوشیدنی‌های سرد -->
+        <div class="category" onclick="toggleCategory(this)">
+            <div class="category-header">
+                <span>نوشیدنی‌های سرد</span>
+                <span>+</span>
+            </div>
+            <div class="category-content">
+                <div class="menu-item">
+                    <span>آیس لاته</span>
+                    <span>T130</span>
+                </div>
+                <div class="menu-item">
+                    <span>ایس امریکانو</span>
+                    <span>T110</span>
+                </div>
+                <div class="menu-item">
+                    <span>ایس کوکولاته</span>
+                    <span>T145</span>
+                </div>
+                <div class="menu-item">
+                    <span>ایس کارامل ماکیاتو</span>
+                    <span>T145</span>
+                </div>
+                <div class="menu-item">
+                    <span>ایس موکا</span>
+                    <span>T145</span>
+                </div>
+                <div class="menu-item">
+                    <span>افوگاتو</span>
+                    <span>T145</span>
+                </div>
+                <div class="menu-item">
+                    <span>شیک لوتوس</span>
+                    <span>T220</span>
+                </div>
+                <div class="menu-item">
+                    <span>شیک نوتلا</span>
+                    <span>T245</span>
+                </div>
+                <div class="menu-item">
+                    <span>شیک کره بادوم زمینی</span>
+                    <span>T230</span>
+                </div>
+                <div class="menu-item">
+                    <span>ماچا منگو</span>
+                    <span>T190</span>
+                </div>
+                <div class="menu-item">
+                    <span>ماچا بری</span>
+                    <span>T170</span>
+                </div>
+                <div class="menu-item">
+                    <span>اسپرولینا هلو انبه</span>
+                    <span>T220</span>
+                </div>
+                <div class="menu-item">
+                    <span>اسپرولینا بری</span>
+                    <span>T200</span>
+                </div>
+                <div class="menu-item">
+                    <span>ایس اورنج اسپرسو</span>
+                    <span>T160</span>
+                </div>
+                <div class="menu-item">
+                    <span>ایس انار اسپرسو</span>
+                    <span>T160</span>
+                </div>
+                <div class="menu-item">
+                    <span>ملون موهیتو</span>
+                    <span>T110</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- بارگرم -->
+        <div class="category" onclick="toggleCategory(this)">
+            <div class="category-header">
+                <span>بارگرم</span>
+                <span>+</span>
+            </div>
+            <div class="category-content">
+                <div class="menu-item">
+                    <span>چای لاهیجان</span>
+                    <span>T75</span>
+                </div>
+                <div class="menu-item">
+                    <span>چای سبز</span>
+                    <span>T90</span>
+                </div>
+                <div class="menu-item">
+                    <span>چای دارچین</span>
+                    <span>T85</span>
+                </div>
+                <div class="menu-item">
+                    <span>دمنوش دارچین</span>
+                    <span>T100</span>
+                </div>
+                <div class="menu-item">
+                    <span>دمنوش سرخ</span>
+                    <span>T105</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // تابع toggleCategory
+        function toggleCategory(category) {
+            // بستن همه دسته‌های دیگر
+            document.querySelectorAll('.category').forEach(item => {
+                if (item !== category) {
+                    item.classList.remove('active');
+                    item.querySelector('.category-header span:last-child').textContent = '+';
+                }
+            });
+
+            // تغییر وضعیت دسته فعلی
+            category.classList.toggle('active');
+            const sign = category.querySelector('.category-header span:last-child');
+            sign.textContent = category.classList.contains('active') ? '-' : '+';
+
+            // اسکرول به بالای دسته باز شده
+            if (category.classList.contains('active')) {
+                category.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // PWA Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker ثبت شد');
+                    })
+                    .catch(err => {
+                        console.log('خطا در ثبت ServiceWorker:', err);
+                    });
+            });
+        }
+
+        // دکمه نصب PWA
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', () => {
+            if(deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('کاربر نصب را پذیرفت');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
