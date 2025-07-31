@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منوی کافه تجربه</title>
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#8B4513">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #A52A2A;
+            --background-color: #f5f5f5;
+            --card-color: #ffffff;
+            --accent-color: #D2B48C;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            display: none;
+        }
+
+        /* بقیه استایل‌ها مانند قبل... */
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="install-btn" id="installButton">نصب اپلیکیشن</button>
+    
+    <div class="container">
+        <!-- محتوای منوی شما مانند قبل -->
+    </div>
+
+    <!-- PWA Service Worker -->
+    <script>
+        // ثبت Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker ثبت شد');
+                    })
+                    .catch(err => {
+                        console.log('خطا در ثبت ServiceWorker:', err);
+                    });
+            });
+        }
+
+        // دکمه نصب PWA
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', () => {
+            if(deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('کاربر نصب را پذیرفت');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
